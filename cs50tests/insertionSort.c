@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void insertionSort(int *arr);
+void insertionSort(int arr[], int size);
 
 void main_insertionSort()
 {
@@ -13,7 +13,10 @@ void main_insertionSort()
 	}
 	printf("\n");
 
-	insertionSort(arrayOne);
+	printf("Address of array: %i\n", &arrayOne);
+	printf("Size of array: %i\n", sizeof arrayOne);
+
+	insertionSort(arrayOne, sizeof arrayOne/ sizeof arrayOne[0]);
 
 	for (int i = 0; i < 6; i++)
 	{
@@ -21,32 +24,32 @@ void main_insertionSort()
 	}
 }
 
-void insertionSort(int *arr)
+void insertionSort(int arr[], int size)
 {
-	int firstPointer=arr, sorted = *arr, unsorted = *(arr+1);
+	int index = 0, sorted = arr[index], unsorted = arr[index + 1];
 
-	while( (arr+1))
+	while (index+1 < size)
 	{
-		sorted = *arr;
-		unsorted = *(arr+1);
+		sorted = arr[index];
+		unsorted = arr[index + 1];
 		if (sorted <= unsorted)
 		{
-			arr++;
+			index++;
 		}
 		else
 		{
 			while (sorted > unsorted)
 			{
-				*arr = unsorted;
-				*(arr+1) = sorted;
-				if (arr>firstPointer)
+				arr[index] = unsorted;
+				arr[index + 1] = sorted;
+				if (index > 0)
 				{
-					arr--;
+					index--;
 				}
-				sorted = *arr;
-				unsorted = *(arr+1);
+				sorted = arr[index];
+				unsorted = arr[index + 1];
 			}
 		}
 	}
-	free(firstPointer, sorted, unsorted);
+	//free(firstPointer, sorted, unsorted);
 }
